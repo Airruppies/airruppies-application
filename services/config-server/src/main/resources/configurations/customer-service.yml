@@ -1,0 +1,11 @@
+server:
+  port: 8030
+spring:
+  data:
+    mongodb:
+      username: airruppies
+      password: Airru2024
+      host: localhost
+      port: 27017
+      database: customer
+      authentication-database: admin
