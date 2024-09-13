@@ -84,7 +84,6 @@ public class UserServiceImpl implements UserService{
         UserResource userResource = usersResource.get(userRepresentation1.getId());
         userResource.executeActionsEmail(List.of("UPDATE_PASSWORD"));
 
-
     }
 
     @Override

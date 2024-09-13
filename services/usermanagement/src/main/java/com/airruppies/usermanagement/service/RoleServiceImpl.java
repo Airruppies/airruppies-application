@@ -15,6 +15,7 @@ import java.util.Collections;
 @Service
 @Slf4j
 public class RoleServiceImpl implements RoleService{
+
     private final UserService userService;
 
     @Value("${app.keycloak.realm}")
@@ -22,8 +23,6 @@ public class RoleServiceImpl implements RoleService{
     private final Keycloak keycloak;
     @Override
     public void assignRole(String userId, String roleName) {
-
-
         UserResource user = userService.getUser(userId);
         RolesResource rolesResource = getRolesResource();
         RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
@@ -32,7 +31,6 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public void deleteRoleFromUser(String userId, String roleName) {
-
         UserResource user = userService.getUser(userId);
         RolesResource rolesResource = getRolesResource();
         RoleRepresentation representation = rolesResource.get(roleName).toRepresentation();
@@ -40,7 +38,6 @@ public class RoleServiceImpl implements RoleService{
     }
 
     private RolesResource getRolesResource(){
-
         return keycloak.realm(realm).roles();
     }
 

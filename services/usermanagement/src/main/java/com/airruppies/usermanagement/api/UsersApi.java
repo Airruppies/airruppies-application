@@ -8,14 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class UsersApi {
 
     private final UserService userService;
 
 
-    @PostMapping
+    @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody NewUserRecord newUserRecord) {
 
         userService.createUser(newUserRecord);

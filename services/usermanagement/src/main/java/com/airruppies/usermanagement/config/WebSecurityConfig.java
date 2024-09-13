@@ -25,7 +25,7 @@ public class WebSecurityConfig {
             web.ignoring().requestMatchers(
                     HttpMethod.POST,
                     "/public/**",
-                    "/users"
+                    "/api/v1/users"
             );
             web.ignoring().requestMatchers(
                     HttpMethod.GET,
