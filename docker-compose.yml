@@ -3,8 +3,8 @@ services:
     container_name: ms_pg_sql
     image: postgres
     environment:
-      POSTGRES_USER: ganzymalgwi
-      POSTGRES_PASSWORD: Malgwi2924
+      POSTGRES_USER: airruppies
+      POSTGRES_PASSWORD: Airr2024@#
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -44,7 +44,7 @@ services:
         - 9098:8080
       environment:
           KEYCLOAK_USER: admin
-          KEYCLOAK_PASSWORD: admin
+          KEYCLOAK_PASSWORD: Airr2024@#
       networks:
           - microservices-net
       command:
@@ -59,8 +59,8 @@ services:
     volumes:
       - mongo:/data
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=ganzymalgwi
-      - MONGO_INITDB_ROOT_PASSWORD=Malgwi2924
+      - MONGO_INITDB_ROOT_USERNAME=airruppies
+      - MONGO_INITDB_ROOT_PASSWORD=Airr2024@#
 
   mongo-express:
     image: mongo-express
@@ -69,8 +69,8 @@ services:
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=ganzymalgwi
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=Malgwi2924
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=airruppies
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=Airr2024@#
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
   zookeeper:
