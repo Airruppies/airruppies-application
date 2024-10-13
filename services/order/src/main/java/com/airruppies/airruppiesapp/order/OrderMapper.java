@@ -12,9 +12,10 @@ public class OrderMapper {
         }
         return Order.builder()
                 .id(request.id())
-                .reference(request.reference())
-                .paymentMethod(request.paymentMethod())
                 .customerId(request.customerId())
+                .reference(request.reference())
+                .totalAmount(request.amount())
+                .paymentMethod(request.paymentMethod())
                 .build();
     }
 
