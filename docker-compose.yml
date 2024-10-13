@@ -4,15 +4,20 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: airruppies
-      POSTGRES_PASSWORD: Airr2024@#
-      PGDATA: /data/postgres
+      POSTGRES_PASSWORD: Airr@#2024
+      PGDATA: /var/lib/postgresql/data    # Fixed PGDATA path
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - microservices-net
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airruppies"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   pgadmin:
     container_name: ms_pgadmin
@@ -30,7 +35,7 @@ services:
     restart: unless-stopped
 
   zipkin:
-    container_name: zipkin
+    container_name: ms_zipkin
     image: openzipkin/zipkin
     ports:
       - "9411:9411"
@@ -38,33 +43,46 @@ services:
       - microservices-net
 
   keycloak:
-      container_name: ms_keycloak
-      image: quay.io/keycloak/keycloak:latest
-      ports:
-        - 9098:8080
-      environment:
-          KEYCLOAK_USER: admin
-          KEYCLOAK_PASSWORD: Airr2024@#
-      networks:
-          - microservices-net
-      command:
-        - "start-dev"
-
+    container_name: ms_keycloak
+    image: quay.io/keycloak/keycloak:latest
+    ports:
+      - 9098:8080
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Airr@#2024
+    networks:
+      - microservices-net
+    command:
+      - "start-dev"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   mongodb:
+    container_name: ms_mongo_db
     image: mongo
-    container_name: mongo_db
     ports:
       - 27017:27017
     volumes:
       - mongo:/data
     environment:
       - MONGO_INITDB_ROOT_USERNAME=airruppies
-      - MONGO_INITDB_ROOT_PASSWORD=Airr2024@#
+      - MONGO_INITDB_ROOT_PASSWORD=Airr@#2024
+      - MONGO_HOST=mongodb
+    networks:
+      - microservices-net
+    healthcheck:
+      test: [ "CMD", "mongo", "--username", "airruppies", "--password", "Airr@#2024", "--eval", "db.runCommand({ ping: 1 })" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 
   mongo-express:
+    container_name: ms_mongo_express
     image: mongo-express
-    container_name: mongo_express
     restart: unless-stopped
     ports:
       - 8081:8081
@@ -72,10 +90,16 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=airruppies
       - ME_CONFIG_MONGODB_ADMINPASSWORD=Airr2024@#
       - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      mongodb:
+        condition: service_healthy   # Wait until mongodb is healthy
+    networks:
+      - microservices-net
+
 
   zookeeper:
+    container_name: ms_zookeeper
     image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
     environment:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -84,10 +108,15 @@ services:
       - "22181:2181"
     networks:
       - microservices-net
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   kafka:
-    image: confluentinc/cp-kafka:latest
     container_name: ms_kafka
+    image: confluentinc/cp-kafka:latest
     ports:
       - "9092:9092"
     depends_on:
@@ -101,13 +130,20 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
     networks:
       - microservices-net
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9092"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   mail-dev:
-    container_name: ms-mail-dev
+    container_name: ms_mail_dev
     image: maildev/maildev
     ports:
       - 1080:1080
       - 1025:1025
+    networks:
+      - microservices-net
 
 networks:
   microservices-net:

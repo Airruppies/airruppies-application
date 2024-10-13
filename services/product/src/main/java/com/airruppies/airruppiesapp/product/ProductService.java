@@ -18,9 +18,7 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductMapper mapper;
 
-    public Integer createProduct(
-            ProductRequest request
-    ) {
+    public Integer createProduct(ProductRequest request) {
         var product = mapper.toProduct(request);
         return repository.save(product).getId();
     }
@@ -39,9 +37,7 @@ public class ProductService {
     }
 
     @Transactional(rollbackFor = ProductPurchaseException.class)
-    public List<ProductPurchaseResponse> purchaseProducts(
-            List<ProductPurchaseRequest> request
-    ) {
+    public List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
         var productIds = request
                 .stream()
                 .map(ProductPurchaseRequest::productId)
@@ -50,14 +46,14 @@ public class ProductService {
         if (productIds.size() != storedProducts.size()) {
             throw new ProductPurchaseException("One or more products does not exist");
         }
-        var sortedRequest = request
+        var storedRequest = request
                 .stream()
                 .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
                 .toList();
         var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
         for (int i = 0; i < storedProducts.size(); i++) {
             var product = storedProducts.get(i);
-            var productRequest = sortedRequest.get(i);
+            var productRequest = storedRequest.get(i);
             if (product.getAvailableQuantity() < productRequest.quantity()) {
                 throw new ProductPurchaseException("Insufficient stock quantity for product with ID:: " + productRequest.productId());
             }
