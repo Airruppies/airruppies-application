@@ -1,7 +1,7 @@
-package com.airruppies.airruppies.payment;
+package com.airruppies.airruppiesapp.payment;
 
-import com.airruppies.airruppies.notification.NotificationProducer;
-import com.airruppies.airruppies.notification.PaymentNotificationRequest;
+import com.airruppies.airruppiesapp.notification.NotificationProducer;
+import com.airruppies.airruppiesapp.notification.PaymentNotificationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

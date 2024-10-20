@@ -1,6 +1,6 @@
-package com.airruppies.airruppies.handler;
+package com.airruppies.airruppiesapp.handler;
 
-import com.airruppies.airruppies.exception.BusinessException;
+import com.airruppies.airruppiesapp.exception.BusinessException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

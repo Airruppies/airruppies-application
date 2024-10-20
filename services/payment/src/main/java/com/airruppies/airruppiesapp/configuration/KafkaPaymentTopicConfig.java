@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.configuration;
+package com.airruppies.airruppiesapp.configuration;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.handler;
+package com.airruppies.airruppiesapp.handler;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.payment;
+package com.airruppies.airruppiesapp.payment;
 
 import java.math.BigDecimal;
 

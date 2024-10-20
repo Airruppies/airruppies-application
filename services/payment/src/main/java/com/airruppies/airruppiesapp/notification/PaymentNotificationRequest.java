@@ -1,6 +1,6 @@
-package com.airruppies.airruppies.notification;
+package com.airruppies.airruppiesapp.notification;
 
-import com.airruppies.airruppies.payment.PaymentMethod;
+import com.airruppies.airruppiesapp.payment.PaymentMethod;
 
 import java.math.BigDecimal;
 

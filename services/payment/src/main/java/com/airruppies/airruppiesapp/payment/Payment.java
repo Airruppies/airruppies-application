@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.payment;
+package com.airruppies.airruppiesapp.payment;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

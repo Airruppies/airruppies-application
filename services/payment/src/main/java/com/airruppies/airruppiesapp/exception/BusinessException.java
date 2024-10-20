@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.exception;
+package com.airruppies.airruppiesapp.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

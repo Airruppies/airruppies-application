@@ -1,4 +1,4 @@
-package com.airruppies.airruppies.security;
+package com.airruppies.airruppiesapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
