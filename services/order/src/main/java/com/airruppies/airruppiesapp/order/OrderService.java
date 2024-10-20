@@ -36,7 +36,7 @@ public class OrderService {
 
     @Transactional
     public Integer createOrder(OrderRequest request) {
-        var customer = this.customerClient.findCustomerById(request.customerId())
+        var customer = customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() -> new BusinessException("Cannot create order:: No customer exists with the provided ID"));
 
         var purchasedProducts = productClient.purchaseProducts(request.products());
@@ -78,13 +78,13 @@ public class OrderService {
     public List<OrderResponse> findAllOrders() {
         return this.repository.findAll()
                 .stream()
-                .map(this.mapper::fromOrder)
+                .map(mapper::fromOrder)
                 .collect(Collectors.toList());
     }
 
     public OrderResponse findById(Integer id) {
         return this.repository.findById(id)
-                .map(this.mapper::fromOrder)
+                .map(mapper::fromOrder)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("No order found with the provided ID: %d", id)));
     }
 }

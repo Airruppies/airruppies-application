@@ -19,7 +19,7 @@ public class PaymentController {
     public ResponseEntity<Integer> createPayment(
             @RequestBody @Valid PaymentRequest request
     ) {
-        return ResponseEntity.ok(this.service.createPayment(request));
+        return ResponseEntity.ok(service.createPayment(request));
     }
 }
 
