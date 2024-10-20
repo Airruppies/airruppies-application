@@ -3,8 +3,8 @@ server:
 spring:
   data:
     mongodb:
-      username: ganzymalgwi
-      password: Malgwi2924
+      username: airruppies
+      password: Airr@#2024
       host: localhost
       port: 27017
       database: notification
@@ -18,12 +18,12 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: '*'
-        spring.json.type.mapping: orderConfirmation:com.airruppies.airruppiesapp.kafka.order.OrderConfirmation,paymentConfirmation:com.airruppies.airruppiesapp.kafka.payment.PaymentConfirmation
+        spring.json.type.mapping: orderConfirmation:com.airruppies.airruppiesapp.kafka.order.OrderConfirmation,paymentConfirmation:com.airruppies.airruppiesapp.notification.PaymentNotificationRequest
   mail:
     host: localhost
     port: 1025
-    username: ganzymalgwi
-    password: Malgwi2924
+    username: airruppies
+    password: Airr@#2024
     properties:
       mail:
         smtp:
